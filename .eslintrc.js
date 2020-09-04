@@ -1,24 +1,88 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: 'tsconfig.json',
-    sourceType: 'module',
+  'root': true,
+  'parser': '@typescript-eslint/parser',
+  'parserOptions': {
+      'tsconfigRootDir': __dirname,
+      'project': 'tsconfig.json',
+      'ecmaVersion': 2018,
+      'sourceType': 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
+  'plugins': ['@typescript-eslint'],
+  'extends': [
+      'airbnb-typescript/base',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:@typescript-eslint/recommended-requiring-type-checking',
+      'prettier/@typescript-eslint',
+      'plugin:prettier/recommended',
+      'plugin:import/errors',
+      'plugin:import/warnings',
+      'plugin:import/typescript',
+      'plugin:eslint-comments/recommended',
+      'plugin:unicorn/recommended',
   ],
-  root: true,
-  env: {
-    node: true,
-    jest: true,
-  },
-  rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+  'rules': {
+      'func-names': 'off',
+      'no-prototype-builtins': 'off',
+      'class-methods-use-this': 'off',
+      'no-use-before-define': [
+          'error',
+          {
+              functions: false,
+              classes: true,
+              variables: true,
+          },
+      ],
+      'no-extend-native': [
+          'error',
+          {
+              exceptions: ['Object', 'Array', 'Date'],
+          },
+      ],
+      'no-void': ['error', { 'allowAsStatement': true }],
+      '@typescript-eslint/explicit-member-accessibility': [
+          'error',
+          {
+              overrides: { constructors: 'no-public' },
+          },
+      ],
+      '@typescript-eslint/explicit-function-return-type': [
+          'error',
+          {
+              allowExpressions: true,
+              allowTypedFunctionExpressions: true,
+          },
+      ],
+      '@typescript-eslint/no-use-before-define': [
+          'error',
+          {
+              functions: false,
+              classes: true,
+              variables: true,
+              typedefs: true,
+          },
+      ],
+      '@typescript-eslint/unbound-method': [
+          'error',
+          {
+              ignoreStatic: true,
+          },
+      ],
+      'prettier/prettier': [
+          'error',
+          {
+              endOfLine: 'auto',
+          },
+      ],
+      'import/prefer-default-export': 'off',
+      'import/no-extraneous-dependencies': [
+          'error',
+          {
+              devDependencies: ['**/*.test.ts', '**/*.spec.ts', '**/*.e2e-spec.ts', '**/*.po.ts'],
+          },
+      ],
+      'unicorn/no-for-loop': 'error',
+      'no-plusplus': 'off',
+      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/no-fn-reference-in-iterator': 'off'
   },
 };
